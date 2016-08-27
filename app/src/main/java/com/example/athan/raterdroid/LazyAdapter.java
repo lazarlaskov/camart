@@ -1,6 +1,7 @@
 package com.example.athan.raterdroid;
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,23 @@ public class LazyAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
-        if(convertView==null)
-            vi = inflater.inflate(R.layout.row_listview_item, null);
+        final ViewHolder gridViewImageHolder;
+        if(convertView==null) {
+            vi = inflater.inflate(R.layout.row_listview_item, parent, false);
+            gridViewImageHolder = new ViewHolder();
+            gridViewImageHolder.imageView = (ImageView) vi.findViewById(R.id.rli_image);
+            gridViewImageHolder.imageView.setMaxHeight(200);
+            gridViewImageHolder.imageView.setMaxWidth(200);
+            vi.setTag(gridViewImageHolder);
+        }else{
+            gridViewImageHolder = (ViewHolder) vi.getTag();
+        }
 
-        TextView text=(TextView)vi.findViewById(R.id.rli_publisher);;
-        ImageView image=(ImageView)vi.findViewById(R.id.rli_image);
-        text.setText("item "+position);
-        imageLoader.displayImage(data[position],image);
+        //TextView text=(TextView)vi.findViewById(R.id.rli_publisher);;
+        //ImageView image=(ImageView) vi.findViewById(R.id.rli_image);
+        //text.setText("item "+position);
+        imageLoader.displayImage(data[position],gridViewImageHolder.imageView);
         return vi;
     }
 }
+

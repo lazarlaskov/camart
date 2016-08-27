@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class ProfileFragment extends Fragment {
 
     TextView tw_profile_user;
     MyDBHandler dbHandler;
-    ListView list;
+    GridView list;
     LazyAdapter adapter;
 
     @Nullable
@@ -37,15 +38,16 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         dbHandler = new MyDBHandler(getActivity());
-        list=(ListView) getActivity().findViewById(R.id.listView1);
+
+        list=(GridView) getActivity().findViewById(R.id.listView1);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).build();
         ImageLoader.getInstance().init(config);
 
         adapter=new LazyAdapter(getActivity(), imageUrls,ImageLoader.getInstance());
         list.setAdapter(adapter);
-        //tw_profile_user = (TextView) getActivity().findViewById(R.id.tw_profile_user);
-        //tw_profile_user.setText(dbHandler.getLoginInformation().get_id() + "'s profile");
+        tw_profile_user = (TextView) getActivity().findViewById(R.id.tw_profile_user);
+        tw_profile_user.setText(dbHandler.getLoginInformation().get_id() + "'s profile");
     }
 
 
