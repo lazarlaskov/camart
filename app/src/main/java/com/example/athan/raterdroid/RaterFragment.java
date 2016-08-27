@@ -33,8 +33,6 @@ public class RaterFragment extends Fragment {
         //tw = (TextView) getActivity().findViewById(R.id.tw_user1);
         //tw.setText(username);
 
-        Toast.makeText(getActivity().getApplicationContext(), username, Toast.LENGTH_LONG).show();
-
         return rootView;
     }
 

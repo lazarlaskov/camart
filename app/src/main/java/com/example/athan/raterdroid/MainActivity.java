@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        android.support.v7.app.ActionBar menu = getSupportActionBar();
+        menu.setDisplayShowHomeEnabled(true);
+        menu.setLogo(R.mipmap.ic_launcher);
+        menu.setDisplayUseLogoEnabled(true);
+        menu.setDisplayShowTitleEnabled(false);
+
         dbHandler = new MyDBHandler(getApplicationContext());
 
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottomnavig_ID);

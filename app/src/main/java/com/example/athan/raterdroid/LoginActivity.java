@@ -46,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        android.support.v7.app.ActionBar menu = getSupportActionBar();
+        menu.setDisplayShowHomeEnabled(true);
+        menu.setLogo(R.mipmap.ic_launcher);
+        menu.setDisplayUseLogoEnabled(true);
+
         btn_login = (Button) findViewById(R.id.btn_login);
         et_pass = (EditText) findViewById(R.id.et_password);
         et_user = (EditText) findViewById(R.id.et_username);
@@ -63,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private void attemptLogin(){
         final String user = et_user.getText().toString();
         final String pass = et_pass.getText().toString();
-        Toast.makeText(getApplicationContext(), "LOGIN ATTEMPT!", Toast.LENGTH_LONG).show();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        Toast.makeText(getApplicationContext(), "STARTING REQUERST!", Toast.LENGTH_LONG).show();
         StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/ratedroid/login.php",
                 new Response.Listener<String>() {
                     @Override

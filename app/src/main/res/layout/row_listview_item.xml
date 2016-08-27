@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:layout_margin="13dp"
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
+
+
+    <TextView
+        android:id="@+id/rli_publisher"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginLeft="10dip"
+        android:layout_weight="1"
+        android:text="atanasij"
+        android:textColor="#16a085"
+        android:textStyle="bold"
+        android:textSize="20dip" />
+
+
+    <ImageView
+        android:id="@+id/rli_image"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_gravity="top"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+         />
+
+
+
+</LinearLayout>
