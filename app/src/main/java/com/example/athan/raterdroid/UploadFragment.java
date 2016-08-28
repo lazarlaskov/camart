@@ -161,7 +161,8 @@ public class UploadFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/ratedroid/uploadp.php",
+        StringRequest request = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.ipAddresServer +"/ratedroid/uploadp.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

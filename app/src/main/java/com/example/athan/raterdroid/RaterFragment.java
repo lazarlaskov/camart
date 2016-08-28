@@ -26,13 +26,6 @@ public class RaterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_rater, container, false);
-
-        dbHandler = new MyDBHandler(getActivity().getApplicationContext());
-        String username = "NEMA NISTO";
-        username = dbHandler.getLoginInformation().get_id();
-        //tw = (TextView) getActivity().findViewById(R.id.tw_user1);
-        //tw.setText(username);
-
         return rootView;
     }
 

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="200dp"
     android:layout_margin="13dp"
     android:orientation="vertical"
     android:background="#000000" >
 
 
-   <!-- <TextView
-        android:id="@+id/rli_publisher"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center_vertical"
-        android:layout_marginLeft="10dip"
-        android:layout_weight="1"
-        android:text="atanasij"
-        android:textColor="#16a085"
-        android:textStyle="bold"
-        android:textSize="20dip" /> -->
-
-
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rli_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:scaleType="fitCenter"
-
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
          />
+    <TextView
+        android:id="@+id/rli_publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="54"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:drawableLeft="@drawable/star"
+        android:textColor="#f1c40f"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:textSize="50dp"
+
+        />
 
 
-
-</LinearLayout>
+</RelativeLayout>

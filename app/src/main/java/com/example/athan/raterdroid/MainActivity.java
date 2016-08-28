@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         android.support.v7.app.ActionBar menu = getSupportActionBar();
         menu.setDisplayShowHomeEnabled(true);
-        menu.setLogo(R.mipmap.ic_launcher);
+        menu.setLogo(R.drawable.camartlogo);
         menu.setDisplayUseLogoEnabled(true);
         menu.setDisplayShowTitleEnabled(false);
 
