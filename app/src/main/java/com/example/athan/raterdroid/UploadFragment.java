@@ -162,7 +162,7 @@ public class UploadFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         StringRequest request = new StringRequest(Request.Method.POST,
-                "http://" + MainActivity.ipAddresServer +"/ratedroid/uploadp.php",
+                "http://" + MainActivity.ipAddresServer +"/uploadp.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -183,7 +183,7 @@ public class UploadFragment extends Fragment {
 
                         new DownloadImageTask((ImageView) getActivity().
                                 findViewById(R.id.iw_upReview))
-                                .execute("http://" + MainActivity.ipAddresServer + "/ratedroid/photos/" + poslednaslikaime);
+                                .execute("http://" + MainActivity.ipAddresServer + "/photos/" + poslednaslikaime);
 
                     }
                 }, new Response.ErrorListener() {

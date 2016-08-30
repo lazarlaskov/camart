@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 public class MainActivity extends AppCompatActivity {
 
     public static AHBottomNavigation bottomNavigation;
-    public static String ipAddresServer = "192.168.0.3";
+    public static String ipAddresServer = "192.168.1.122/ratedroid";
     public static MyDBHandler dbHandler;
 
     @Override
@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
         AHBottomNavigationItem upload_item = new AHBottomNavigationItem("Take photo", R.drawable.upload);
         AHBottomNavigationItem profile_item = new AHBottomNavigationItem("My Profile", R.drawable.user);
 
-        bottomNavigation.setAccentColor(Color.parseColor("#ecf0f1"));
+        bottomNavigation.setAccentColor(Color.parseColor("#FFFFFF"));
         bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#34495e"));
-        bottomNavigation.setInactiveColor(Color.parseColor("#16a085"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#bdc3c7"));
 
         bottomNavigation.addItem(likes_item);
         bottomNavigation.addItem(upload_item);

@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="200dp"
-    android:layout_margin="13dp"
-    android:orientation="vertical"
-    android:background="#000000" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:padding="15dp"
+    >
 
 
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rli_image"
-        android:layout_width="200dip"
-        android:layout_height="200dip"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-         />
     <TextView
-        android:id="@+id/rli_publisher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tw_list_item_publisher"
+        android:text="Publisher"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        android:background="#000000"
+        android:id="@+id/iw_list_item_image"
+        android:src="@drawable/lynx"
+        android:layout_below="@+id/tw_list_item_publisher"
+        />
+
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="54"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:drawableLeft="@drawable/star"
-        android:textColor="#f1c40f"
-        android:singleLine="true"
-        android:textStyle="bold"
-        android:textSize="50dp"
-
+        android:id="@+id/rb_list_item_rating"
+        android:layout_below="@+id/iw_list_item_image"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X.XX of Y"
+        android:textSize="23dp"
+        android:paddingTop="15dp"
+        android:textStyle="bold"
+        android:id="@+id/tw_avg_rating"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/iw_list_item_image"
+        android:layout_alignParentRight="true"
+        />
+
+
+
+
 
 
 </RelativeLayout>

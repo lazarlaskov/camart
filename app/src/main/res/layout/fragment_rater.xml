@@ -5,11 +5,13 @@
     android:id="@+id/raterfrag"
     tools:context="com.example.athan.raterdroid.RaterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tw_user1"
-        android:text="Rater fragment" />
+        android:id="@+id/lw_rater_list_view"
+        >
+
+
+    </ListView>
 
 </FrameLayout>

@@ -2,27 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
     android:id="@+id/profilefrag"
-    android:paddingBottom="30dp"
     tools:context="com.example.athan.raterdroid.ProfileFragment">
 
-        <LinearLayout
+   <!--     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginBottom="50dp"
             >
+    -->
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
-        android:padding="20dp"
-        android:id="@+id/tw_profile_user"
-        android:textSize="22dp"
-        android:textStyle="bold"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:padding="20dp"
+            android:id="@+id/tw_profile_user"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            />
 
             <GridView
                 android:id="@+id/listView1"
@@ -35,19 +37,30 @@
                 android:scrollbarAlwaysDrawHorizontalTrack="true"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="5dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:padding="5dp">
 
             </GridView>
 
-            <ProgressBar
+
+         <!--   <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/btn_load_more"
+                android:layout_alignParentBottom="true"
+                android:text="Load more"
+                /> -->
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/pb_load_more"
                 android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:visibility="invisible"
                 />
 
 
-        </LinearLayout>
+    <!--    </LinearLayout> -->
 </RelativeLayout>

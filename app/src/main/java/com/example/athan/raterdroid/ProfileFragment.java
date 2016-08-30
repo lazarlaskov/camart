@@ -1,11 +1,6 @@
 package com.example.athan.raterdroid;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,21 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -46,7 +35,11 @@ public class ProfileFragment extends Fragment {
     TextView tw_profile_user;
     MyDBHandler dbHandler;
     GridView list;
-    LazyAdapter adapter;
+    ProfileGridAdapter adapter;
+    ProgressBar progressBar;
+    //Button btn_load_more;
+    //ProgressDialog progressDialog;
+
     static int NUM_LOADED_PROFILE = 0;
     @Nullable
     @Override
@@ -59,11 +52,14 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        progressBar = (ProgressBar) getActivity().findViewById(R.id.pb_load_more);
+
         dbHandler = new MyDBHandler(getActivity());
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity())
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
+                .diskCacheExtraOptions(480,320,null)
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.FIFO)
                 .build();
@@ -71,15 +67,33 @@ public class ProfileFragment extends Fragment {
         ImageLoader.getInstance().init(config);
         ImageLoader imageLoader = ImageLoader.getInstance();
 
-        adapter = new LazyAdapter(getActivity(), ImageLoader.getInstance());
+        adapter = new ProfileGridAdapter(getActivity(), ImageLoader.getInstance());
 
         list = (GridView) getActivity().findViewById(R.id.listView1);
         list.setAdapter(adapter);
+
+        //btn_load_more = (Button) getActivity().findViewById(R.id.btn_load_more);
 
         tw_profile_user = (TextView) getActivity().findViewById(R.id.tw_profile_user);
         tw_profile_user.setText(dbHandler.getLoginInformation().get_id() + "'s profile");
 
         makeRequest();
+
+        boolean pauseOnScroll = false; // or true
+        boolean pauseOnFling = false; // or false
+        PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, pauseOnScroll, pauseOnFling);
+        list.setOnScrollListener(listener);
+
+        /*
+        btn_load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loadMoreImages();
+            }
+        });
+        */
+
 
 
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -94,7 +108,10 @@ public class ProfileFragment extends Fragment {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
             }
+
         });
+
+
 
 
     }
@@ -106,16 +123,12 @@ public class ProfileFragment extends Fragment {
     public void makeRequest(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        Toast.makeText(getActivity(),"Sending request to server: " +
-                        "http://"+MainActivity.ipAddresServer+"/ratedroid/getphotos.php"
-                ,Toast.LENGTH_LONG).show();
-
+        //Toast.makeText(getActivity(), "Loading images", Toast.LENGTH_SHORT).show();
         StringRequest request = new StringRequest(
-                "http://"+MainActivity.ipAddresServer+"/ratedroid/getphotos.php",
+                "http://"+MainActivity.ipAddresServer+"/getphotos.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getActivity(),"Got response from server",Toast.LENGTH_LONG).show();
                         try {
                             parseJSONArray(new JSONObject(response));
                             int n = imageUrls.size();
@@ -137,7 +150,7 @@ public class ProfileFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),"Something went wrong. Please try again.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -151,13 +164,12 @@ public class ProfileFragment extends Fragment {
             String photo_id = c.getString("photo_id");
             String photo_name = c.getString("photo_name");
             imageIDs.add(photo_id);
-            imageUrls.add("http://" + MainActivity.ipAddresServer + "/ratedroid/photos/" + photo_name);
+            imageUrls.add("http://" + MainActivity.ipAddresServer + "/photos/" + photo_name);
         }
     }
 
     public void loadMoreImages(){
 
-        ProgressBar progressBar = (ProgressBar) getActivity().findViewById(R.id.pb_load_more);
         progressBar.setVisibility(View.VISIBLE);
 
         int n = 0;
@@ -169,6 +181,7 @@ public class ProfileFragment extends Fragment {
             }
         }
         NUM_LOADED_PROFILE+= n;
+
         progressBar.setVisibility(View.GONE);
 
     }

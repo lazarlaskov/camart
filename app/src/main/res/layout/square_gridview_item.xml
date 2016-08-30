@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    android:layout_margin="13dp"
+    android:orientation="vertical"
+    android:background="#000000" >
+
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rli_image"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+         />
+    <TextView
+        android:id="@+id/rli_publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="54"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:padding="3dp"
+        android:gravity="center"
+        android:drawableLeft="@drawable/user"
+        android:textColor="#FFFFFF"
+        android:singleLine="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+
+        />
+
+   <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/grid_photo_rating_bar"
+        android:layout_centerHorizontal="true"
+        android:numStars="5"
+        android:stepSize="1"
+        android:rating="1"
+        android:background="#20313159"
+        android:isIndicator="true"
+
+        />
+
+
+</RelativeLayout>

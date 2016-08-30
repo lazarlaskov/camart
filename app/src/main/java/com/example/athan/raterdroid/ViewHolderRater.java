@@ -5,10 +5,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
- * Created by athan on 27.8.16.
+ * Created by athan on 30.8.16.
  */
-public class ViewHolder {
+public class ViewHolderRater {
         ImageView imageView;
-        TextView textView;
+        TextView textViewPublisher;
         RatingBar ratingBar;
+        TextView textViewAvgRating;
 }

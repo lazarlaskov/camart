@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         final String user = et_user.getText().toString();
         final String pass = et_pass.getText().toString();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/ratedroid/login.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/login.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,13 +145,16 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/ratedroid/register.php",
+        StringRequest request = new StringRequest(Request.Method.POST, "http://" + MainActivity.ipAddresServer +"/register.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                        if(response.equals("1")){
                            Toast.makeText(getApplicationContext(),"Registration successful. Please log in.",Toast.LENGTH_LONG).show();
                            fnk_backreg_swap();
+                       }else {
+                           Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+
                        }
                     }
                 }, new Response.ErrorListener() {
@@ -201,14 +204,3 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
