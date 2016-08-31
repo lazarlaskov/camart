@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -28,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ProfileFragment extends Fragment {
@@ -116,26 +120,26 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private ArrayList<String> imageUrls = new ArrayList<String>();
-    private ArrayList<String> imageIDs = new ArrayList<String>();
-
+    //private ArrayList<String> imageUrls = new ArrayList<String>();
+    //private ArrayList<String> imageIDs = new ArrayList<String>();
+      private ArrayList<Photo> images = new ArrayList<Photo>();
 
     public void makeRequest(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         //Toast.makeText(getActivity(), "Loading images", Toast.LENGTH_SHORT).show();
-        StringRequest request = new StringRequest(
-                "http://"+MainActivity.ipAddresServer+"/getphotos.php",
+        StringRequest request = new StringRequest(Request.Method.POST,
+                "http://"+MainActivity.ipAddresServer+"/getphotosprofile.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             parseJSONArray(new JSONObject(response));
-                            int n = imageUrls.size();
-                            if(imageUrls.size() > 15) n = 15;
+                            int n = images.size();
+                            if(images.size() > 15) n = 15;
 
                             for(int i = 0; i < n; i++){
-                                adapter.addItem(imageUrls.get(i));
+                                adapter.addItem(images.get(i));
                             }
 
                             NUM_LOADED_PROFILE = n;
@@ -152,7 +156,15 @@ public class ProfileFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
                     }
-                });
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<>();
+                map.put("user_name", dbHandler.getLoginInformation().get_id());
+
+                return map;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -163,8 +175,16 @@ public class ProfileFragment extends Fragment {
             JSONObject c = (JSONObject) items.get(i);
             String photo_id = c.getString("photo_id");
             String photo_name = c.getString("photo_name");
-            imageIDs.add(photo_id);
-            imageUrls.add("http://" + MainActivity.ipAddresServer + "/photos/" + photo_name);
+            String user_name = c.getString("user_name");
+            String total_votes = c.getString("broj_glasovi");
+            String avg_votes = c.getString("prosek_glasovi");
+            Photo photo = new Photo();
+            photo.photo_id = photo_id;
+            photo.photo_url = "http://" + MainActivity.ipAddresServer + "/photos/" + photo_name;
+            photo.user_name = user_name;
+            photo.avg_votes = avg_votes;
+            photo.total_votes = total_votes;
+            images.add(photo);
         }
     }
 
@@ -173,11 +193,11 @@ public class ProfileFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
         int n = 0;
-        if(imageUrls.size() >= NUM_LOADED_PROFILE) {
-            if (imageUrls.size() - NUM_LOADED_PROFILE >= 10) n = 10;
-            else n = imageUrls.size() - NUM_LOADED_PROFILE;
+        if(images.size() >= NUM_LOADED_PROFILE) {
+            if (images.size() - NUM_LOADED_PROFILE >= 10) n = 10;
+            else n = images.size() - NUM_LOADED_PROFILE;
             for (int i = NUM_LOADED_PROFILE; i < NUM_LOADED_PROFILE + n; i++) {
-                adapter.addItem(imageUrls.get(i));
+                adapter.addItem(images.get(i));
             }
         }
         NUM_LOADED_PROFILE+= n;

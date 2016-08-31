@@ -19,13 +19,13 @@ import java.util.ArrayList;
 public class ProfileGridAdapter extends BaseAdapter {
 
     private Activity activity;
-    private ArrayList<String> data;
+    private ArrayList<Photo> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader;
 
     public ProfileGridAdapter(Activity a, ImageLoader imageLoader) {
         activity = a;
-        data=new ArrayList<String>();
+        data=new ArrayList<Photo>();
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.imageLoader = imageLoader;
     }
@@ -34,12 +34,12 @@ public class ProfileGridAdapter extends BaseAdapter {
         return data.size();
     }
 
-    public void initList(ArrayList<String> arrayList){
+    public void initList(ArrayList<Photo> arrayList){
         data.addAll(arrayList);
     }
 
-    public void addItem(String s){
-        data.add(s);
+    public void addItem(Photo photo){
+        data.add(photo);
         this.notifyDataSetChanged();
     }
 
@@ -81,12 +81,19 @@ public class ProfileGridAdapter extends BaseAdapter {
             vi.setTag(gridViewImageHolder);
         }
 
-        ;
-        //ImageView image=(ImageView) vi.findViewById(R.id.rli_image);
+        if(data.get(position).total_votes.equals("null")){
+            data.get(position).total_votes = "0";
+            data.get(position).avg_votes = "0";
+        }
 
-        imageLoader.displayImage(data.get(position),gridViewImageHolder.imageView,options);
-        gridViewImageHolder.textView.setText(new String(position + " "));
-        gridViewImageHolder.ratingBar.setRating(position%5);
+        String average = String.format("%.2f", Float.parseFloat(data.get(position).avg_votes));
+
+        imageLoader.displayImage(data.get(position).photo_url,gridViewImageHolder.imageView,options);
+        gridViewImageHolder.ratingBar.setRating(Float.parseFloat(average));
+
+        gridViewImageHolder.textView.setText(average + " / "
+                + data.get(position).total_votes);
+
 
         return vi;
     }

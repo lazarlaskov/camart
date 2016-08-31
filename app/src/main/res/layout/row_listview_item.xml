@@ -7,7 +7,6 @@
     android:padding="15dp"
     >
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,34 +16,52 @@
         android:textStyle="bold"
         />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
-        android:layout_centerHorizontal="true"
-        android:background="#000000"
-        android:id="@+id/iw_list_item_image"
-        android:src="@drawable/lynx"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_rater_layout"
         android:layout_below="@+id/tw_list_item_publisher"
-        />
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:id="@+id/iw_list_item_image"
+            android:src="@drawable/lynx"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X.XX of Y"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:id="@+id/tw_avg_rating"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/user"
+            android:gravity="center_vertical"
+            />
+
+    </RelativeLayout>
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rb_list_item_rating"
-        android:layout_below="@+id/iw_list_item_image"
+        android:layout_below="@+id/img_rater_layout"
         />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="X.XX of Y"
-        android:textSize="23dp"
-        android:paddingTop="15dp"
-        android:textStyle="bold"
-        android:id="@+id/tw_avg_rating"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@id/iw_list_item_image"
+        android:id="@+id/btn_vote"
+        android:text="Vote"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         />
 
 

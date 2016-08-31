@@ -82,26 +82,26 @@ public class RaterFragment extends Fragment {
 
     }
 
-    private ArrayList<String> imageUrls = new ArrayList<String>();
-    private ArrayList<String> imageIDs = new ArrayList<String>();
-
+    //private ArrayList<String> imageUrls = new ArrayList<String>();
+    //private ArrayList<String> imageIDs = new ArrayList<String>();
+    private ArrayList<Photo> images = new ArrayList<Photo>();
 
     public void makeRequest(){
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         //Toast.makeText(getActivity(), "Loading images", Toast.LENGTH_SHORT).show();
         StringRequest request = new StringRequest(
-                "http://"+MainActivity.ipAddresServer+"/getphotos.php",
+                "http://"+MainActivity.ipAddresServer+"/getphotos.php?username="+dbHandler.getLoginInformation().get_id(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             parseJSONArray(new JSONObject(response));
-                            int n = imageUrls.size();
-                            if(imageUrls.size() > 15) n = 15;
+                            int n = images.size();
+                            if(images.size() > 15) n = 15;
 
                             for(int i = 0; i < n; i++){
-                                adapter.addItem(imageUrls.get(i));
+                                adapter.addItem(images.get(i));
                             }
 
                             NUM_LOADED_RATER = n;
@@ -129,8 +129,19 @@ public class RaterFragment extends Fragment {
             JSONObject c = (JSONObject) items.get(i);
             String photo_id = c.getString("photo_id");
             String photo_name = c.getString("photo_name");
-            imageIDs.add(photo_id);
-            imageUrls.add("http://" + MainActivity.ipAddresServer + "/photos/" + photo_name);
+            String user_name = c.getString("user_name");
+            String total_votes = c.getString("broj_glasovi");
+            String avg_votes = c.getString("prosek_glasovi");
+            String moj_rejt = c.getString("moj_rejting");
+            Photo photo = new Photo();
+            photo.photo_id = photo_id;
+            photo.photo_url = "http://" + MainActivity.ipAddresServer + "/photos/" + photo_name;
+            photo.user_name = user_name;
+            photo.avg_votes = avg_votes;
+            photo.total_votes = total_votes;
+            if(moj_rejt.equals("null")) moj_rejt = "0";
+            photo.myRating = Float.parseFloat(moj_rejt);
+            images.add(photo);
         }
     }
 
@@ -138,11 +149,11 @@ public class RaterFragment extends Fragment {
     public void loadMoreImages(){
 
         int n = 0;
-        if(imageUrls.size() >= NUM_LOADED_RATER) {
-            if (imageUrls.size() - NUM_LOADED_RATER >= 10) n = 10;
-            else n = imageUrls.size() - NUM_LOADED_RATER;
+        if(images.size() >= NUM_LOADED_RATER) {
+            if (images.size() - NUM_LOADED_RATER >= 10) n = 10;
+            else n = images.size() - NUM_LOADED_RATER;
             for (int i = NUM_LOADED_RATER; i < NUM_LOADED_RATER + n; i++) {
-                adapter.addItem(imageUrls.get(i));
+                adapter.addItem(images.get(i));
             }
         }
         NUM_LOADED_RATER+= n;

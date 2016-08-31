@@ -1,5 +1,6 @@
 package com.example.athan.raterdroid;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -12,4 +13,8 @@ public class ViewHolderRater {
         TextView textViewPublisher;
         RatingBar ratingBar;
         TextView textViewAvgRating;
+        Float myRating;
+        Button btn_vote;
+        int total_votes;
+
 }

@@ -57,15 +57,19 @@ public class UploadFragment extends Fragment {
     private TextView tw_response;
     private ImageView iw_uploadphoto;
     private String poslednaslikaime;
+    private MyDBHandler dbHandler;
+    public static String CURRENT_USER;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_upload, container, false);
+        dbHandler = new MyDBHandler(getActivity());
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         getFileUri();
         i.putExtra(MediaStore.EXTRA_OUTPUT, file_uri);
+        CURRENT_USER = dbHandler.getLoginInformation().get_id();
         startActivityForResult(i, 10);
         return rootView;
 
@@ -200,6 +204,7 @@ public class UploadFragment extends Fragment {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("encoded_string", encoded_string);
                 map.put("image_name", poslednaslikaime);
+                map.put("user_name", CURRENT_USER);
 
                 return map;
             }

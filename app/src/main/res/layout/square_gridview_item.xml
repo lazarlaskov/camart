@@ -39,7 +39,6 @@
         android:id="@+id/grid_photo_rating_bar"
         android:layout_centerHorizontal="true"
         android:numStars="5"
-        android:stepSize="1"
         android:rating="1"
         android:background="#20313159"
         android:isIndicator="true"
