@@ -128,9 +128,9 @@ public class UploadFragment extends Fragment {
         protected Void doInBackground(Void... voids) {
             bitmap = null;
            // bitmap = BitmapFactory.decodeFile(file_uri.getPath());
-          //  ByteArrayOutputStream stream = new ByteArrayOutputStream();
-         //   bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-          //  bitmap.recycle();
+           // ByteArrayOutputStream stream = new ByteArrayOutputStream();
+           // bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+           // bitmap.recycle();
 
             bitmap = decodeFile(new File(file_uri.getPath()));
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -160,7 +160,7 @@ public class UploadFragment extends Fragment {
         progressBar = (ProgressBar) getActivity().findViewById(R.id.progressupload);
         tw_response = (TextView) getActivity().findViewById(R.id.uploadresponse);
         progressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#1abc9c"), PorterDuff.Mode.SRC_ATOP);
-      //  tw_response.setBackgroundColor(Color.parseColor("#1abc9c"));
+      //tw_response.setBackgroundColor(Color.parseColor("#1abc9c"));
         tw_response.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
