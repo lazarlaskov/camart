@@ -23,7 +23,8 @@ import java.io.PrintWriter;
 public class MainActivity extends AppCompatActivity {
 
     public static AHBottomNavigation bottomNavigation;
-    public static String ipAddresServer = "192.168.1.122/ratedroid";
+    public static String ipAddresServer = "192.168.0.103/ratedroid";
+//    public static String ipAddresServer = "172.20.10.7/ratedroid";
     public static MyDBHandler dbHandler;
 
     @Override
